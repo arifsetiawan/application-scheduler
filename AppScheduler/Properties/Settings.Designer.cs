@@ -25,13 +25,73 @@ namespace AppScheduler.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SomeAppPath")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string executablePath {
             get {
                 return ((string)(this["executablePath"]));
             }
             set {
                 this["executablePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int dataLimit {
+            get {
+                return ((int)(this["dataLimit"]));
+            }
+            set {
+                this["dataLimit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5000")]
+        public int timerInterval {
+            get {
+                return ((int)(this["timerInterval"]));
+            }
+            set {
+                this["timerInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2000-01-01")]
+        public global::System.DateTime startTime {
+            get {
+                return ((global::System.DateTime)(this["startTime"]));
+            }
+            set {
+                this["startTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3000-01-01")]
+        public global::System.DateTime endTime {
+            get {
+                return ((global::System.DateTime)(this["endTime"]));
+            }
+            set {
+                this["endTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool firstTime {
+            get {
+                return ((bool)(this["firstTime"]));
+            }
+            set {
+                this["firstTime"] = value;
             }
         }
     }

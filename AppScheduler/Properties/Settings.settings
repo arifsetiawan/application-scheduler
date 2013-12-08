@@ -3,7 +3,22 @@
   <Profiles />
   <Settings>
     <Setting Name="executablePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">SomeAppPath</Value>
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="dataLimit" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="timerInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5000</Value>
+    </Setting>
+    <Setting Name="startTime" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2000-01-01</Value>
+    </Setting>
+    <Setting Name="endTime" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">3000-01-01</Value>
+    </Setting>
+    <Setting Name="firstTime" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>
