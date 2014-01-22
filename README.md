@@ -3,6 +3,8 @@
 
 # Application Scheduler
 
+![Application Scheduler](https://i.cloudup.com/cXM8WMli6G-3000x3000.png)
+
 Application Scheduler is a simple C# based application to start and stop other application based on time and monitor 
 data usage. If data usage exceed the limit, Application Scheduler will stop the running application.
 
@@ -16,4 +18,15 @@ It will start downloader at specified time and stop it when end time or data lim
 
 ### How to use
 
+Set :
+
+* Application to execute
+* Start time
+* End time
+* Data limit
+
+then click `Start` to start the timer 
+
 ### Limitation
+
+This is simple application. Lots of feature might be missing. Logs is not implemented yet.

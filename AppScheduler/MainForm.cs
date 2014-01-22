@@ -25,6 +25,10 @@ namespace AppScheduler
 
         private long previousBytesReceived = 0;
         private long previousBytedSent = 0;
+        private long startBytesReceived = 0;
+        private long startBytesSent = 0;
+        private long totalBytes = 0;
+        private long dataLimitBytes = 0;
 
         public MainForm()
         {
@@ -117,10 +121,14 @@ namespace AppScheduler
 
             previousBytedSent = interfaceStats.BytesSent;
             previousBytesReceived = interfaceStats.BytesReceived;
-            long totalBytes = previousBytedSent + previousBytesReceived;
+            totalBytes = (previousBytedSent-startBytesSent) + (previousBytesReceived-startBytesReceived);
 
-            uploadDataLabel.Text = BytesToString(previousBytedSent);
-            downloadDataLabel.Text = BytesToString(previousBytesReceived);
+            //totalDataLabel.Text = BytesToString(totalBytes);
+            //uploadDataLabel.Text = BytesToString(previousBytedSent);
+            //downloadDataLabel.Text = BytesToString(previousBytedSent);
+            totalDataLabel.Text = totalBytes.ToString();
+            uploadDataLabel.Text = previousBytedSent.ToString();
+            downloadDataLabel.Text = previousBytesReceived.ToString();
             uploadSpeedLabel.Text = bytesSentSpeed.ToString() + " KB/s";
             downloadSpeedLabel.Text = bytesReceivedSpeed.ToString() + " KB/s";
         }
@@ -128,7 +136,7 @@ namespace AppScheduler
         void timer_Elapsed(object sender, EventArgs e)
         {
             DateTime now = DateTime.Now;
-            currentTime.Text = now.ToString("hh:mm:ss");
+            currentTime.Text = now.ToString("HH:mm:ss");
 
             DateTime startTime = startTimePicker.Value;
             DateTime endTime = endTimePicker.Value;
@@ -140,6 +148,12 @@ namespace AppScheduler
                     statusLabelBig.Text = "Application Running";
                     applicationStarted = true;
                     appProcess = Process.Start(appNameTextBox.Text);
+
+                    // calculate initial bytes of this network
+                    NetworkInterface nic = networkInterfaces[activeInterfaceIndex];
+                    IPv4InterfaceStatistics interfaceStats = nic.GetIPv4Statistics();
+                    startBytesSent = interfaceStats.BytesSent;
+                    startBytesReceived = interfaceStats.BytesReceived;
                 }
             }
             else
@@ -147,14 +161,21 @@ namespace AppScheduler
                 if (now > endTime && !appExecuted)
                 {
                     statusLabelBig.Text = "Application Ended";
-                    appProcess.CloseMainWindow();
-                    appProcess.Close();
+                    appProcess.Kill();
                     appExecuted = true;
                     applicationStarted = false;
                 }
                 else
                 {
                     UpdateNetworkInterface();
+
+                    if (totalBytes > dataLimitBytes && !appExecuted)
+                    {
+                        statusLabelBig.Text = "Data limit reached";
+                        appProcess.Kill();
+                        appExecuted = true;
+                        applicationStarted = true;
+                    }
 
                     Double diffInSeconds = (now - startTime).TotalSeconds;
                     elapsedTime.Text = diffInSeconds.ToString() + " s";
@@ -181,6 +202,7 @@ namespace AppScheduler
             try
             {
                 dataLimit = int.Parse(dataLimitTextBox.Text);
+                dataLimitBytes = dataLimit * 1024 * 1024;
             }
             catch (Exception)
             {
@@ -228,7 +250,7 @@ namespace AppScheduler
                                 appExecuted = false; 
                                 timer.Start();
                                 DateTime now2 = DateTime.Now;
-                                currentTime.Text = now2.ToString("hh:mm:ss");
+                                currentTime.Text = now2.ToString("HH:mm:ss");
                                 statusLabel.Text = "Timer started";
                             }
                         }
@@ -253,11 +275,11 @@ namespace AppScheduler
         {
             string[] suf = { "B", "KB", "MB", "GB", "TB", "PB", "EB" };
             if (byteCount == 0)
-                return "0" + suf[0];
+                return "0 " + suf[0];
             long bytes = Math.Abs(byteCount);
             int place = Convert.ToInt32(Math.Floor(Math.Log(bytes, 1024)));
             double num = Math.Round(bytes / Math.Pow(1024, place), 1);
-            return (Math.Sign(byteCount) * num).ToString() + suf[place];
+            return (Math.Sign(byteCount) * num).ToString() + " " + suf[place];
         }
     }
 }

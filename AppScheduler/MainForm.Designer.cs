@@ -72,7 +72,6 @@
             this.startBtn = new System.Windows.Forms.Button();
             this.tabPageLogs = new System.Windows.Forms.TabPage();
             this.logsBox = new System.Windows.Forms.ListBox();
-            this.tabPageHelp = new System.Windows.Forms.TabPage();
             this.tabPageAbout = new System.Windows.Forms.TabPage();
             this.label14 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -126,7 +125,7 @@
             // 
             // startTimePicker
             // 
-            this.startTimePicker.CustomFormat = "hh:mm:ss";
+            this.startTimePicker.CustomFormat = "HH:mm:ss";
             this.startTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.startTimePicker.Location = new System.Drawing.Point(132, 51);
             this.startTimePicker.Name = "startTimePicker";
@@ -136,7 +135,7 @@
             // 
             // endTimePicker
             // 
-            this.endTimePicker.CustomFormat = "hh:mm:ss";
+            this.endTimePicker.CustomFormat = "HH:mm:ss";
             this.endTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.endTimePicker.Location = new System.Drawing.Point(132, 79);
             this.endTimePicker.Name = "endTimePicker";
@@ -182,7 +181,6 @@
             // 
             this.tabControl.Controls.Add(this.tabPageControl);
             this.tabControl.Controls.Add(this.tabPageLogs);
-            this.tabControl.Controls.Add(this.tabPageHelp);
             this.tabControl.Controls.Add(this.tabPageAbout);
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
@@ -520,15 +518,6 @@
             this.logsBox.Size = new System.Drawing.Size(531, 355);
             this.logsBox.TabIndex = 0;
             // 
-            // tabPageHelp
-            // 
-            this.tabPageHelp.Location = new System.Drawing.Point(4, 22);
-            this.tabPageHelp.Name = "tabPageHelp";
-            this.tabPageHelp.Size = new System.Drawing.Size(544, 371);
-            this.tabPageHelp.TabIndex = 3;
-            this.tabPageHelp.Text = "Help";
-            this.tabPageHelp.UseVisualStyleBackColor = true;
-            // 
             // tabPageAbout
             // 
             this.tabPageAbout.Controls.Add(this.label14);
@@ -661,7 +650,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label totalDataLabel;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TabPage tabPageHelp;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox timerIntervalTextBox;
         private System.Windows.Forms.Label label15;
